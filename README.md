@@ -9,6 +9,7 @@ java_binary_diff
     根据 chunk_map 和 target_file 生成 patch;
     根据 src_file 和 patch 生成与 target_file 一样的 result_file;
     
-  TODO: 
-    实现将 chunk_map 和 patch 数据经过enchode保存到文件，以及从文件读取。
-    初步计划使用 BASE64 编码
+  实现了将 patch 通过 base64 编码保存到磁盘文本文件
+  
+  TODO:
+    将 patch 文件压缩保存

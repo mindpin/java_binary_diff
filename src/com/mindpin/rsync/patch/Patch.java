@@ -1,5 +1,8 @@
 package com.mindpin.rsync.patch;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +36,16 @@ public class Patch {
 			re += p.bytes_size();
 		}
 		return re;
+	}
+	
+	public void write_to_file(File file) throws IOException{
+		file.delete();
+		
+		FileWriter fw = new FileWriter(file);
+		for(PatchPart part : parts){
+			fw.write(part.get_encode_str());
+		}
+		
+		fw.close();
 	}
 }

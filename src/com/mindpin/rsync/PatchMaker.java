@@ -60,9 +60,11 @@ public class PatchMaker {
 				next_block = false;
 			}else{
 				// 匹配，将现在的 diff 加入 patch, 再将 chunk 加入 patch
-				patch.add(diff_data);
-				sum += diff_data.size();
-				diff_data = new ArrayList<Byte>();
+				if(diff_data.size() > 0){
+					patch.add(diff_data);
+					sum += diff_data.size();
+					diff_data = new ArrayList<Byte>();
+				}
 				
 				patch.add(chunk);
 				sum += chunk.length;
@@ -124,11 +126,19 @@ public class PatchMaker {
 	}
 	
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-		File src_file = new File("d:/差分比较实验/差分比较实验1.rar");
-		File target_file = new File("d:/差分比较实验/差分比较实验2.rar");
+//		File src_file = new File("d:/差分比较实验/差分比较实验1.rar");
+//		File target_file = new File("d:/差分比较实验/差分比较实验2.rar");
+		
+//		File src_file = new File("d:/差分比较实验/差分比较实验2.rar");
+//		File target_file = new File("d:/差分比较实验/差分比较实验1.rar");
+		
+		File src_file = new File("d:/差分比较实验/月球_a.bmp");
+		File target_file = new File("d:/差分比较实验/月球_c.bmp");
 		
 		HashMap<Long, List<Chunk>> chunk_map = new ChunkParser(src_file).parse();
 		Patch patch = new PatchMaker(target_file, chunk_map).make();
 		System.out.println(patch);
+		
+		patch.write_to_file(new File("d:/差分比较实验/patch"));
 	}
 }

@@ -36,10 +36,8 @@ public class PatchApply {
 		long sum = 0;
 		for(PatchPart part : patch.parts){
 			if(part instanceof PatchPartData){
-				for(byte b : ((PatchPartData)part).bytes){
-					write_raf.write(b);
-					sum ++;
-				}
+				write_raf.write(((PatchPartData)part).bytes);
+				sum += ((PatchPartData)part).bytes_size();
 			}
 			
 			if(part instanceof PatchPartChunk){

@@ -15,4 +15,9 @@ public class PatchPartChunk implements PatchPart {
 	public int bytes_size() {
 		return 1;
 	}
+
+	@Override
+	public String get_encode_str() {
+		return "#" + id;
+	}
 }
